@@ -1,3 +1,8 @@
+<?php
+include "includes/header.php";
+include "includes/menu.php";
+?>
+
 <main class="container mt-5">
   <h2 class="text-center mb-4">Contratar Serviço</h2>
   <form action="processa_contrato.php" method="POST" class="bg-light p-4 shadow rounded">
@@ -58,3 +63,7 @@
     <button class="btn btn-success w-100">Enviar Solicitação</button>
   </form>
 </main>
+
+<?php
+include "inclui/footer.php";
+?>
