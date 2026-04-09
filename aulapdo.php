@@ -25,7 +25,7 @@ $servicos = $cmd->fetchAll(PDO::FETCH_ASSOC);
             <th>Preço</th>
             <th>Descontinuado</th>
         </tr>
- 
+ <?php foreach($servicos as $servicos);?>
         <tr>
             <td>1</td>
             <td>Formatacao</td>
@@ -33,6 +33,7 @@ $servicos = $cmd->fetchAll(PDO::FETCH_ASSOC);
             <td>R$150,00</td>
             <td>Não</td>
         </tr>
+        <?php  ?>
     </table>
 </body>
 </html>
