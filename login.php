@@ -1,4 +1,5 @@
-<<?php 
+<<?php
+session_start(); 
 require "class/Usuario.php";
 $user = new Usuario();
 // var_dump($user->efetuarLogin('admin@servicehub.com', 'admin123'));
@@ -6,6 +7,14 @@ $msg = "";
 if ($_SERVER['REQUEST_METHOD']==="POST"){
     $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     $senha = $_POST["senha"]?? null;
+    if(!$email || !$senha){
+        $msg ="preencha os dados corretamente";
+        
+    }
+    $usuario = Usuario::efetuarLogin($email, $senha);
+    if(count($usuario)>0){
+
+    }
 }
 
 ?>
