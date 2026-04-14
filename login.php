@@ -13,9 +13,22 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
     }
     $usuario = Usuario::efetuarLogin($email, $senha);
     if(count($usuario)>0){
+$_SESSION['usuario_id'] =$usuario['id'];
+$_SESSION['nome'] =$usuario['nome'];
+$_SESSION['tipo'] =$usuario['tipo'];
 
+if($usuario['primeiro_login'] == 1){
+    header('location: primeiro_login.php');
+    exit;
+}
+if($usuario['tipo']==1){
+    header('location: admin_dashboard.php');
+    }else{
+header(('location: cliente_dashboard.php'));
     }
 }
+    }
+
 
 ?>
 
