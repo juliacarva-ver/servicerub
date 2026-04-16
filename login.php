@@ -1,7 +1,15 @@
 <<?php
 session_start(); 
+
+// evita acesso se ja estiver logado
+if(isset($_SESSION['usuario_id'])){
+  $destino = ($_SESSION['tipo'] ==1)? "admin_dashboard.php":"cliente_dashboard.php"; // estrutura do if ternario
+header("location: $destino");
+
+}
+
 require "class/Usuario.php";
-$user = new Usuario();
+// $user = new Usuario();
 // var_dump($user->efetuarLogin('admin@servicehub.com', 'admin123'));
 $msg = "";
 if ($_SERVER['REQUEST_METHOD']==="POST"){

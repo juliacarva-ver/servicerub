@@ -3,7 +3,7 @@
 require_once "config/conexao.php";
 $pdo = obterPdo();
  
-$cmd = $pdo->prepare("SELECT * FROM servicos WHERE descontinuado=b '0' ");
+$cmd = $pdo->prepare("SELECT * FROM servicos WHERE descontinuado=b'0'");
 $cmd->execute(); //executar
 $servicos = $cmd->fetchAll(PDO::FETCH_ASSOC); //fetchAll retorna todos, fetch é um por um
  
@@ -45,20 +45,18 @@ include "includes/menu.php";
 
 <main class="container mt-5">
 
-  <section id="servicos">
-    <h2 class="text-center mb-4">Serviços Prestados</h2>
-
-    <div class="row g-4">
-    
+ <div class="row g-4">
+    <?php foreach($servicos as $servico):?>
         <div class="col-md-3">
           <article class="card shadow h-100">
             <div class="card-body">
-              <h5>alterar</h5>
-              <p></p>
-              <p class="fw-bold text-success">R$ 350.00</p>
+              <h5><?= $servico['nome'] ?></h5>
+              <p><?= $servico['descricao'] ?></p>
+              <p class="fw-bold text-success">R$<?= number_format($servico['preco'],2,',','.')  ?></p>
             </div>
           </article>
         </div>
+     <?php endforeach;?>
     </div>
   </section>
 
@@ -121,5 +119,5 @@ include "includes/menu.php";
 </main>
 
 <?php
-include "inclui/footer.php";
+include "includes/footer.php";
 ?>
