@@ -126,4 +126,16 @@ $usuarioBanco = new Usuario();
     }
  }
  $cliente_id = $cliente->getId();
+ // cadastra solicitacao
+ $solicitacao = new Solicitacao();
+ $solicitacao->setcliente_id($cliente_id);
+ $solicitacao->setDescricao_problema($descricao);
+ $solicitacao->setData_preferida($data_preferida ?: null);
+ $solicitacao->setEndereco($endereco);
 
+ if(!$solicitacao->inserir()){
+     header("Location: contratar.php?erroErro ao cadastrar a solicitacao");
+    exit(); 
+ }
+$solicitacao_id = $solicitacao->getId();
+// associar os servicos a solicitacao
