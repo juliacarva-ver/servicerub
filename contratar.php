@@ -1,13 +1,34 @@
 <?php
+session_start();
+include_once "class/Servico.php";
+
+if(!isset($_SESSION['csrf_token'])){
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 include "includes/header.php";
 include "includes/menu.php";
+$servicos = Servico::ListarAtivo();
+
+$sucesso =filter_input(INPUT_GET, "sucesso", FILTER_VALIDATE_INT);
+$erro = filter_input(INPUT_GET, "erro", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+
+
+
+
 ?>
 
 <main class="container mt-5">
   <h2 class="text-center mb-4">Contratar Serviço</h2>
+  <?php if ($sucesso):?>
+    <div class=".alert.alert-sucess alert-dismissible fade show" >
+Solicitacao enviada com sucesso! em breve entraremos em contato.
+<button class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <?php  endif;?>
+
   <form action="processa_contrato.php" method="POST" class="bg-light p-4 shadow rounded">
 
-    <input type="hidden" name="csrf_token" value="">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
     <div class="row">
 
@@ -43,14 +64,18 @@ include "includes/menu.php";
 
       <div class="col-md-6 mb-3">
         <label class="form-label">Serviço</label>
-        <select name="servico_id" class="form-select" required>
+        <select name="servico_ids[]" class="form-select" multiple required size=10>
           <option value="">Selecione...</option>
-     
-            <option value="">
-           
+          <?php foreach ($servicos as $servico) { ?>
+
+            <option value="<?= $servico['id'] ?>">
+              <?= $servico['nome']  ?>
             </option>
-         
+          <?php } ?>
         </select>
+        <small class="text-mudet">
+          Para selecionar mais de um: segure <strong>CTRL</strong> (Windows) ou <strong>CMD</strong> (Mac)
+        </small>
       </div>
 
       <div class="col-md-12 mb-3">
