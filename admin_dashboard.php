@@ -5,7 +5,7 @@ if(!isset($_SESSION['usuario_id']) || $_SESSION['tipo'] !=1){
     header("location: login.php");
     exit;
 }
-include "includes/heard.php";
+include "includes/header.php";
 include "includes/menu.php";
 ?>
 

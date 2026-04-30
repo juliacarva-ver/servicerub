@@ -89,7 +89,7 @@ class Servico
     // Listar
     public static function listar(): array
     {
-        $cmd = obterPdo()->query("select * from servico order by id desc");
+        $cmd = obterPdo()->query("select * from servicos order by id desc");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
  

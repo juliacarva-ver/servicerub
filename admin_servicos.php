@@ -1,16 +1,16 @@
 <?php 
 include_once "config/conexao.php";
 session_start();
-require_once "class/solicitacao2.php";
+require_once "class/Servico.php";
 
 if(!isset($_SESSION['usuario_id']) || $_SESSION['tipo']!=1){
 header("Location: login.php");
     exit();
 } 
-$servico = Servico::listar();
+
 include "includes/header.php";
 include "includes/menu.php";
- 
+ $servicos = Servico:: listar();
 ?>
 
 
@@ -28,21 +28,21 @@ include "includes/menu.php";
       </tr>
     </thead>
     <tbody>
-        <?php  foreach($servico as $servico):?>
+        <?php  foreach($servicos as $servico):?>
         <tr>
-          <td><?= $servico['id'] ?></td>
-          <td><?= $servico['cliente_nome'] ?></td>
-          <td><?= $servico['cliente_email'] ?></td>
+          <td><?= $servicos['id'] ?></td>
+          <td><?= $servicos['servico_nome'] ?></td>
+          <td><?= $servicos['cliente_email'] ?></td>
           <td>
             <?php 
-            $lista = explode(",", $servico['servicos']);
+            $lista = explode(",", $servicos['servicos']);
             foreach($lista as $serv){
                 echo '<span class="badge bg-dark me-1 mb-1">'.$serv.'</span>';
             }
             ?>
           </td>
-          <td><?= $servico['status'] ?></td>
-          <td><?= date("d/m/Y H:i", strtotime($servico["data_cad"])) ?></td>
+          <td><?= $servicos['status'] ?></td>
+          <td><?= date("d/m/Y H:i", strtotime($servicos["data_cad"])) ?></td>
           <td>
             <a href="admin_responder.php?id=" class="btn btn-primary btn-sm">Responder</a>
           </td>
