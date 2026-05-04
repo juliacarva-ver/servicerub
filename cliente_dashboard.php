@@ -31,9 +31,9 @@
   GROUP BY s.id, s.status, s.data_cad ORDER BY s.data_cad DESC";
  
   //prepara a consulta
-  $stmt = $pdo->prepare($sql);
+  $stmt = obterPdo()->prepare($sql);
   //execute
-  $stmt->execute([$Cliente["id"]]);
+  $stmt->execute($cliente->getId());
   //busca todas as solicitações encontradas no banco
   $solicitacoes = $stmt->fetchAll((PDO::FETCH_ASSOC));
  
@@ -62,7 +62,7 @@
       <!-- percorre todas as solicitações retornadas do banco -->
         <?php foreach($solicitacoes as $s): ?>      
       <tr>
-      <td><?= $a["id"] ?></td>
+      <td><?= $s["id"] ?></td>
          
             <td>
               <?php
