@@ -9,7 +9,7 @@ require_once "includes/funcoes.php";
 
 include "includes/header.php";
 include "includes/menu.php";
- // Verifica se o usuário está logado e se é do tipo cliente = 2
+ // Verifica se o usuário está logado 
   if(!isset($_SESSION['usuario_id']) || $_SESSION["tipo"]!=2){
     header("location: login.php");
   }
@@ -19,7 +19,7 @@ include "includes/menu.php";
     die("ID invalido.");
 }
 
-$id = intval($_GET['id']);
+$id = ($_GET['id']);
 $sql = "SELECT * FROM solicitacoes WHERE id = :id AND usuario_id = :usuario_id";
 $stmt = obterPdo()->prepare($sql);
 $stmt->bindValue(':id', $id);
