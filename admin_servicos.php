@@ -30,9 +30,9 @@ include "includes/menu.php";
     <tbody>
         <?php  foreach($servicos as $servico):?>
         <tr>
-          <td><?= $servicos['id'] ?></td>
-          <td><?= $servicos['servico_nome'] ?></td>
-          <td><?= $servicos['cliente_email'] ?></td>
+          <td><?= $servicos['nome'] ?></td>
+          <td><?= $servicos['descricao'] ?></td>
+          <td><?= $servicos['preco'] ?></td>
           <td>
             <?php 
             $lista = explode(",", $servicos['servicos']);

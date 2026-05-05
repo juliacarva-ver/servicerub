@@ -93,7 +93,7 @@ public function getResposta() {
         INNER JOIN servicos se ON se.id = ss.servico_id
         GROUP BY s.id, s.status, s.data_cad, u.nome, u.email
         ORDER BY s.data_cad DESC";
-        $cmd=obterPdo()->query($sql);
+         $cmd = obterPdo()->prepare($sql);
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
  

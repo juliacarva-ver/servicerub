@@ -1,7 +1,7 @@
 <?php 
-include_once "config/conexao.php";
+// include_once "config/conexao.php";
 session_start();
-require_once "class/solicitacao2.php";
+require_once "class/Solicitacao.php";
 
 if(!isset($_SESSION['usuario_id']) || $_SESSION['tipo']!=1){
 header("Location: login.php");

@@ -4,7 +4,7 @@ session_start();
 require_once "class/Cliente.php";
 require_once "class/Usuario.php";
 require_once "class/Servico.php";
-require_once "class/solicitacao2.php";
+require_once "class/solicitacao.php";
 require_once "class/ServicoSolicitacao.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== "POST"){

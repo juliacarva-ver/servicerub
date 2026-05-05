@@ -23,9 +23,11 @@ include "includes/menu.php";
 if($_SERVER['REQUEST_METHOD']=== "POST"){
     $resposta = filter_input(INPUT_POST, "resposta", FILTER_UNSAFE_RAW);
     $status = filter_input(INPUT_POST, FILTER_VALIDATE_INT);
-if($solicitacao->responder())
+if($solicitacao->responder($resposta, $status)){
+  header("location: admin_solicitacoes.php");
 }
-?>
+}
+?> 
 
 
 <main class="container mt-5">
@@ -41,7 +43,7 @@ if($solicitacao->responder())
         <p><strong>Serviços solicitados</strong></p>
         <ul>
             <?php foreach ($solicitacao->servicos as $servico): ?>
-<li><?= $servico['nome']  ?></li>
+            <li><?= $servico['nome'] ?></li>
             <?php endforeach ?>
         </ul>
         <p><strong>Descricao do problema:</strong></p>
@@ -55,7 +57,7 @@ if($solicitacao->responder())
         <div class="mb-3">
             <label class="form-label">Resposta</label>
             <textarea name="resposta" class="form-control" rows="4" required></textarea>
-            <?=$solicitacao->getDataResposta().'->'$solicitacao  ?>
+            <?=$solicitacao->getDataResposta().'->'.$solicitacao->getResposta(); ?>
         </div>
 
         <div class="mb-3">
