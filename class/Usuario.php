@@ -134,6 +134,7 @@ class Usuario{
             }
             return false;
         }
+        
         // Atualizar
         public function atualizar():bool{
             if(!$this->id) return false;

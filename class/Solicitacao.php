@@ -1,5 +1,6 @@
 <?php
 include_once "config/conexao.php";
+include_once "class/ServicoSolicitacao.php";
  
 class Solicitacao {
  
@@ -14,6 +15,7 @@ class Solicitacao {
     private $resposta_admin;
     private $endereco;
     private $pdo;
+    public $servicos;
  
     public function __construct() {
         $this->pdo = obterPdo();
@@ -22,7 +24,28 @@ class Solicitacao {
     public function getId() {
         return $this->id;
     }
+
+     public function getClienteId() {
+        return $this->cliente_id;
+    }
+     public function getEndereco() {
+        return $this->endereco;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
  
+public function getDescricaoProblema() {
+        return $this->descricao_problema;
+    }
+public function getResposta() {
+        return $this->resposta_admin;
+    }
+
+    public function getDataResposta() {
+        return $this->data_resposta;
+    }
+
     public function setClienteId(int $cliente_id) {
         $this->cliente_id = $cliente_id;
     }
@@ -38,6 +61,8 @@ class Solicitacao {
     public function setEndereco(string $endereco) {
         $this->endereco = $endereco;
     }
+
+
  
     public function inserir(): bool {
         $sql = "INSERT INTO solicitacoes (cliente_id, descricao_problema, data_preferida, status, endereco)
@@ -55,7 +80,6 @@ class Solicitacao {
         }
         return false;
     }
- 
     public static function listar(): array {
         //$sql = "SELECT * FROM solicitacoes ORDER BY data_cad DESC";
        $sql = "SELECT s.id, s.status, s.data_cad
@@ -69,7 +93,7 @@ class Solicitacao {
         INNER JOIN servicos se ON se.id = ss.servico_id
         GROUP BY s.id, s.status, s.data_cad, u.nome, u.email
         ORDER BY s.data_cad DESC";
-        $cmd =obterPdo()->query($sql);
+        $cmd=obterPdo()->query($sql);
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
  
@@ -100,6 +124,7 @@ class Solicitacao {
             $this->data_resposta = $dados["data_resposta"];
             $this->resposta_admin = $dados["resposta_admin"];
             $this->endereco = $dados["endereco"];
+            $this->servicos= ServicoSolicitacao::listarServicosDaSolicitacao($dados["id"]);
  
             return true;
         }
