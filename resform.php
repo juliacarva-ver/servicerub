@@ -2,7 +2,7 @@
 include_once "config/conexao.php";
 $id = $_POST["txtid"];
 $sql ="select nome from servicos where id = :id";
-$cmd = $pdo->prepare($sql);
+$cmd = obterPdo()->prepare($sql);
 $cmd->execute([":id"=>$id]);
 $serv =$cmd->fetch(PDO::FETCH_ASSOC);
 
